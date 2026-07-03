@@ -82,14 +82,3 @@ setInterval(()=>{
     }
 
 },1000);
-const coin = document.getElementById("coin");
-
-coin.addEventListener("pointerdown", () => {
-    coin.style.transform =
-        "perspective(900px) rotateX(18deg) rotateY(-12deg) translateY(12px) scale(.96)";
-});
-
-coin.addEventListener("pointerup", () => {
-    coin.style.transform =
-        "perspective(900px) rotateX(0deg) rotateY(0deg) translateY(0px) scale(1)";
-});
