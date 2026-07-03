@@ -313,3 +313,19 @@ footer button:active{
     color:#FFD700;
 
 }
+#coin{
+    position:relative;
+    z-index:100;
+    pointer-events:auto;
+    touch-action:manipulation;
+}
+
+.coin-wrapper{
+    position:relative;
+    z-index:100;
+}
+
+main{
+    position:relative;
+    z-index:100;
+}
