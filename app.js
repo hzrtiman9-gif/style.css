@@ -30,7 +30,9 @@ function updateUI() {
 updateUI();
 
 // کلیک روی سکه
-coin.addEventListener("click", () => {
+showPlusOne(event.clientX,event.clientY);
+
+coin.addEventListener("click",(event)=>{
 
     if (energy <= 0) return;
 
@@ -48,6 +50,24 @@ coin.addEventListener("click", () => {
     }
 
 });
+
+function showPlusOne(x, y){
+
+    const plus = document.createElement("div");
+
+    plus.className = "plus-one";
+    plus.innerText = "+1";
+
+    plus.style.left = x + "px";
+    plus.style.top = y + "px";
+
+    document.body.appendChild(plus);
+
+    setTimeout(()=>{
+        plus.remove();
+    },800);
+
+}
 
 // انیمیشن فشرده شدن
 coin.addEventListener("pointerdown", () => {
