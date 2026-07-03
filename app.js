@@ -50,25 +50,28 @@ coin.addEventListener("click",(e)=>{
 
     tg.HapticFeedback.impactOccurred("light");
 
-    coin.style.transform="scale(.93)";
 
-    setTimeout(()=>{
-        coin.style.transform="scale(1)";
-    },80);
+coin.addEventListener("pointerdown", () => {
 
-    const plus=document.createElement("div");
-    plus.className="floating";
-    plus.innerText="+1";
+    coin.style.transform = `
+        perspective(900px)
+        rotateX(18deg)
+        rotateY(-18deg)
+        scale(.94)
+    `;
 
-    plus.style.left=e.pageX+"px";
-    plus.style.top=e.pageY+"px";
+});
 
-    document.body.appendChild(plus);
+coin.addEventListener("pointerup", () => {
 
-    setTimeout(()=>{
-        plus.remove();
-    },800);
+    coin.style.transform = `
+        perspective(900px)
+        rotateX(0deg)
+        rotateY(0deg)
+        scale(1)
+    `;
 
+});
 });
 
 setInterval(()=>{
