@@ -102,20 +102,23 @@ coin.addEventListener("pointerleave", () => {
 
 // ---------------- CLICK ----------------
 
-coin.addEventListener("click", (event) => {
+coin.addEventListener("pointerdown", (event) => {
 
     if (energy <= 0) return;
 
-    score += 1;
-    energy -= 1;
+    score++;
+    energy--;
 
     updateUI();
 
     showPlusOne(event.clientX, event.clientY);
 
-    if (navigator.vibrate) {
+    if (navigator.vibrate) navigator.vibrate(15);
 
-        navigator.vibrate(15);
+    if (tg.HapticFeedback)
+        tg.HapticFeedback.impactOccurred("light");
+
+});
 
     }
 
