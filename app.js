@@ -35,17 +35,22 @@ function updateUI(){
 
 updateUI();
 
-coin.addEventListener("click",(e)=>{
+coin.addEventListener("click", () => {
 
-    if(energy<=0) return;
+    if (energy <= 0) return;
 
     score++;
     energy--;
 
     updateUI();
 
-    if(navigator.vibrate){
+    if (navigator.vibrate) {
         navigator.vibrate(20);
+    }
+
+    tg.HapticFeedback.impactOccurred("light");
+
+});
     }
 
     tg.HapticFeedback.impactOccurred("light");
@@ -70,6 +75,8 @@ coin.addEventListener("pointerup", () => {
         rotateY(0deg)
         scale(1)
     `;
+
+});
 
 });
 });
