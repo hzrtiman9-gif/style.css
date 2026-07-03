@@ -134,24 +134,26 @@ justify-content:center;
 align-items:center;
 
 }
+.coin-wrapper{
+    width:100%;
+    display:flex;
+    justify-content:center;
+    align-items:center;
 
+    padding:25px 0;
+}
 #coin{
-    width:68vw;
-    height:68vw;
-
-    max-width:300px;
-    max-height:300px;
+    width: min(70vw, 320px);
+    height: min(70vw, 320px);
 
     border-radius:50%;
+    object-fit:contain;
 
-    transition:
-        transform .08s,
-        filter .15s;
-
-    transform-style:preserve-3d;
-    will-change:transform;
+    transition:transform .08s ease;
+    cursor:pointer;
+    user-select:none;
+    -webkit-user-drag:none;
 }
-
 
 #coin:active{
 
