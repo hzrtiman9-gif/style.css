@@ -215,3 +215,38 @@ cursor:pointer;
         translateY(12px)
         scale(.96);
 }
+.plus-one{
+
+    position:fixed;
+
+    color:#ffd700;
+
+    font-size:28px;
+
+    font-weight:bold;
+
+    pointer-events:none;
+
+    animation:plus .8s ease forwards;
+
+    text-shadow:0 0 12px gold;
+
+}
+
+@keyframes plus{
+
+    0%{
+
+        opacity:1;
+        transform:translate(-50%,0) scale(1);
+
+    }
+
+    100%{
+
+        opacity:0;
+        transform:translate(-50%,-80px) scale(1.6);
+
+    }
+
+}
