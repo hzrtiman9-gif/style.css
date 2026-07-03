@@ -1,11 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
 
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport"
+content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no">
 
-<title>TC</title>
+<title>CoinTC</title>
 
 <link rel="stylesheet" href="style.css">
 
@@ -15,27 +17,108 @@
 
 <body>
 
-<div class="top">
+<div class="background"></div>
 
-<div class="score">
+<header>
+
+<div class="profile">
+
+<div class="avatar"></div>
+
+<div>
+
+<h3 id="username">Loading...</h3>
+
+<p>CoinTC Miner</p>
+
+</div>
+
+</div>
+
+<div class="balance">
+
 <span id="score">0</span>
-<p>CoinTC</p>
-</div>
 
-<div class="energy">
-⚡ <span id="energy">1000</span>/1000
-</div>
+<p>COINTC</p>
 
 </div>
 
-<div class="game">
+</header>
 
-<img src="designarena_image_zijzizcb.jpg"
+<section class="energyBox">
+
+<div class="energyText">
+
+⚡
+
+<span id="energy">
+
+1000
+
+</span>
+
+/1000
+
+</div>
+
+<div class="energyBar">
+
+<div id="energyFill"></div>
+
+</div>
+
+</section>
+
+<main>
+
+<div id="coinBox">
+
+<img
+src="designarena_image_zijzizcb.jpg"
 id="coin">
 
 </div>
 
+</main>
+
+<footer>
+
+<button>
+
+🏠
+
+Home
+
+</button>
+
+<button>
+
+🚀
+
+Boost
+
+</button>
+
+<button>
+
+👥
+
+Friends
+
+</button>
+
+<button>
+
+💰
+
+Earn
+
+</button>
+
+</footer>
+
 <script src="app.js"></script>
 
 </body>
+
 </html>
