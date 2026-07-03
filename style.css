@@ -136,20 +136,22 @@ align-items:center;
 }
 
 #coin{
+    width:68vw;
+    height:68vw;
 
-width:250px;
+    max-width:300px;
+    max-height:300px;
 
-height:250px;
+    border-radius:50%;
 
-border-radius:50%;
+    transition:
+        transform .08s,
+        filter .15s;
 
-cursor:pointer;
-
-box-shadow:0 0 80px gold;
-
-transition:.12s;
-
+    transform-style:preserve-3d;
+    will-change:transform;
 }
+
 
 #coin:active{
 
