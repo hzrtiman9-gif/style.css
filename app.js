@@ -4,24 +4,24 @@ tg.ready();
 tg.expand();
 
 const user = tg.initDataUnsafe?.user;
-const username = document.getElementById("username");
 
-if (user) {
-    username.innerText = user.first_name || user.username || "Player";
-} else {
-    username.innerText = "Player";
+const username = document.getElementById("username");
+const scoreEl = document.getElementById("score");
+const energyEl = document.getElementById("energy");
+const coin = document.getElementById("coin");
+
+if (username) {
+    username.innerText = user?.first_name || user?.username || "Player";
 }
 
 let score = Number(localStorage.getItem("score")) || 0;
 let energy = Number(localStorage.getItem("energy")) || 1000;
 
-const scoreEl = document.getElementById("score");
-const energyEl = document.getElementById("energy");
-const coin = document.getElementById("coin");
+const MAX_ENERGY = 1000;
 
 function updateUI() {
-    scoreEl.innerText = score;
-    energyEl.innerText = energy;
+    if (scoreEl) scoreEl.innerText = score;
+    if (energyEl) energyEl.innerText = energy;
 
     localStorage.setItem("score", score);
     localStorage.setItem("energy", energy);
@@ -29,29 +29,7 @@ function updateUI() {
 
 updateUI();
 
-// کلیک روی سکه
-showPlusOne(event.clientX,event.clientY);
-
-coin.addEventListener("click",(event)=>{
-
-    if (energy <= 0) return;
-
-    score++;
-    energy--;
-
-    updateUI();
-
-    if (navigator.vibrate) {
-        navigator.vibrate(20);
-    }
-
-    if (tg.HapticFeedback) {
-        tg.HapticFeedback.impactOccurred("light");
-    }
-
-});
-
-function showPlusOne(x, y){
+function showPlusOne(x, y) {
 
     const plus = document.createElement("div");
 
@@ -63,34 +41,16 @@ function showPlusOne(x, y){
 
     document.body.appendChild(plus);
 
-    setTimeout(()=>{
+    setTimeout(() => {
         plus.remove();
-    },800);
+    }, 800);
 
 }
 
-// انیمیشن فشرده شدن
 coin.addEventListener("pointerdown", () => {
 
-    coin.style.transform =
-        "perspective(900px) rotateX(18deg) rotateY(-18deg) scale(0.94)";
+    coin.style.transition = "transform .08s";
 
-});
-
-// برگشت به حالت عادی
-coin.addEventListener("pointerup", () => {
-
-    coin.style.transform =
-        "perspective(900px) rotateX(0deg) rotateY(0deg) scale(1)";
-
-});
-
-// شارژ انرژی
-setInterval(() => {
-
-    if (energy < 1000) {
-        energy++;
-        updateUI();
-    }
-
-}, 1000);
+    coin.style.transform = `
+        perspective(900px)
+        rotateX
