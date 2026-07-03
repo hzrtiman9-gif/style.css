@@ -2,7 +2,22 @@ const tg = window.Telegram.WebApp;
 
 tg.ready();
 tg.expand();
+const user = tg.initDataUnsafe?.user;
 
+const username = document.getElementById("username");
+
+if(user){
+
+    username.innerText =
+        user.first_name ||
+        user.username ||
+        "Player";
+
+}else{
+
+    username.innerText = "Player";
+
+}
 let score = Number(localStorage.getItem("score")) || 0;
 let energy = Number(localStorage.getItem("energy")) || 1000;
 
