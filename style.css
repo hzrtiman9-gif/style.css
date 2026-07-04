@@ -1,34 +1,66 @@
+/* =======================================================
+   CoinTC v1.0
+   Part 1
+======================================================= */
+
 *{
     margin:0;
     padding:0;
     box-sizing:border-box;
-    font-family:Arial,sans-serif;
+    -webkit-tap-highlight-color:transparent;
+    user-select:none;
+    font-family:Inter,Arial,sans-serif;
 }
 
-html,body{
+html,
+body{
+
     width:100%;
     height:100%;
     overflow:hidden;
-    background:#0d0d0d;
+    background:#090909;
     color:#fff;
+
 }
 
 body{
+
     display:flex;
     flex-direction:column;
-    background:
-        radial-gradient(circle at top,#242424,#090909 70%);
+    position:relative;
+
 }
+
+/* ================= Background ================= */
 
 .background{
+
     position:fixed;
     inset:0;
-    z-index:-1;
+
     background:
-    radial-gradient(circle,#1e1e1e 0%,#0b0b0b 70%);
+        radial-gradient(circle at top,#222 0%,#121212 35%,#080808 100%);
+
+    z-index:-2;
+
 }
 
-/* ---------- Header ---------- */
+.background::after{
+
+    content:"";
+
+    position:absolute;
+
+    inset:0;
+
+    background:
+    radial-gradient(circle,
+    rgba(255,215,0,.05),
+    transparent 70%);
+
+}
+
+/* ================= Header ================= */
 
 header{
 
@@ -44,29 +76,30 @@ header{
 
 }
 
-.profile{
+.player{
 
     display:flex;
 
     align-items:center;
 
-    gap:12px;
+    gap:14px;
 
 }
 
 .avatar{
 
-    width:55px;
+    width:58px;
 
-    height:55px;
+    height:58px;
 
     border-radius:50%;
 
     overflow:hidden;
 
-    border:2px solid gold;
+    border:2px solid rgba(255,215,0,.7);
 
-    box-shadow:0 0 20px rgba(255,215,0,.4);
+    box-shadow:
+    0 0 18px rgba(255,215,0,.35);
 
 }
 
@@ -80,59 +113,65 @@ header{
 
 }
 
-.profile h2{
+.player-info h2{
 
     font-size:22px;
 
+    font-weight:700;
+
 }
 
-.profile p{
+.player-info p{
+
+    margin-top:4px;
+
+    color:#9b9b9b;
 
     font-size:14px;
 
-    color:#aaa;
-
 }
 
-.balance{
+.wallet{
 
     text-align:right;
 
 }
 
-.balance span{
-
-    display:block;
-
-    font-size:34px;
-
-    font-weight:bold;
+#score{
 
     color:#FFD700;
 
-}
+    font-size:36px;
 
-.balance p{
-
-    color:#aaa;
+    font-weight:700;
 
 }
 
-/* ---------- Energy ---------- */
+.wallet span{
 
-.energyBox{
+    color:#9d9d9d;
+
+    font-size:14px;
+
+}
+
+/* ================= Energy ================= */
+
+.energy{
 
     width:92%;
 
-    margin:auto;
+    margin:0 auto;
 
 }
 
-.energyText{
+.energy-top{
 
     display:flex;
 
     justify-content:space-between;
+
+    align-items:center;
 
     margin-bottom:8px;
 
@@ -140,17 +179,19 @@ header{
 
 }
 
-.energyBar{
+.bar{
 
     width:100%;
 
     height:12px;
 
-    border-radius:30px;
+    border-radius:20px;
+
+    overflow:hidden;
 
     background:#232323;
 
-    overflow:hidden;
+    box-shadow:inset 0 0 6px rgba(0,0,0,.6);
 
 }
 
@@ -160,15 +201,20 @@ header{
 
     height:100%;
 
-    border-radius:30px;
+    border-radius:20px;
 
-    background:linear-gradient(90deg,#FFD700,#ff9800);
+    background:
+    linear-gradient(
+        90deg,
+        #ffd700,
+        #ff9800
+    );
 
-    transition:.3s;
+    transition:.25s;
 
 }
 
-/* ---------- Coin ---------- */
+/* ================= Main ================= */
 
 main{
 
@@ -180,9 +226,15 @@ main{
 
     align-items:center;
 
+    padding:20px;
+
 }
 
-.coin-wrapper{
+/* ================= Coin ================= */
+
+.coin-area{
+
+    width:100%;
 
     display:flex;
 
@@ -190,13 +242,13 @@ main{
 
     align-items:center;
 
-    width:100%;
+    position:relative;
 
 }
 
 #coin{
 
-    width:min(72vw,280px);
+    width:min(72vw,300px);
 
     aspect-ratio:1;
 
@@ -204,31 +256,39 @@ main{
 
     cursor:pointer;
 
+    user-select:none;
+
+    -webkit-user-drag:none;
+
     transition:
-    transform .08s,
-    filter .2s;
+        transform .08s ease,
+        filter .2s ease;
 
     transform-style:preserve-3d;
 
     filter:
-    drop-shadow(0 0 18px rgba(255,215,0,.45));
+        drop-shadow(0 0 20px rgba(255,215,0,.45));
+
+}
+
+#coin:hover{
+
+    filter:
+        drop-shadow(0 0 35px rgba(255,215,0,.8));
 
 }
 
 #coin:active{
 
     transform:
-    perspective(900px)
-    rotateX(15deg)
-    rotateY(-15deg)
-    scale(.93);
-
-    filter:
-    drop-shadow(0 0 35px rgba(255,215,0,.9));
+        perspective(1000px)
+        rotateX(15deg)
+        rotateY(-15deg)
+        scale(.93);
 
 }
 
-/* ---------- +1 ---------- */
+/* ================= Floating +1 ================= */
 
 .plus-one{
 
@@ -236,13 +296,13 @@ main{
 
     color:#FFD700;
 
-    font-size:28px;
+    font-size:30px;
 
     font-weight:bold;
 
     pointer-events:none;
 
-    text-shadow:0 0 12px gold;
+    text-shadow:0 0 15px gold;
 
     animation:plus .8s forwards;
 
@@ -253,22 +313,28 @@ main{
 0%{
 
 opacity:1;
-transform:translate(-50%,0) scale(1);
+
+transform:
+translate(-50%,0)
+scale(1);
 
 }
 
 100%{
 
 opacity:0;
-transform:translate(-50%,-80px) scale(1.8);
+
+transform:
+translate(-50%,-90px)
+scale(1.8);
 
 }
 
 }
 
-/* ---------- Footer ---------- */
+/* ================= Bottom Menu ================= */
 
-footer{
+nav{
 
     width:92%;
 
@@ -276,7 +342,7 @@ footer{
 
     background:#171717;
 
-    border-radius:24px;
+    border-radius:26px;
 
     display:flex;
 
@@ -286,11 +352,13 @@ footer{
 
     padding:12px 0;
 
-    box-shadow:0 0 25px rgba(0,0,0,.5);
+    box-shadow:
+
+    0 0 25px rgba(0,0,0,.5);
 
 }
 
-footer button{
+nav button{
 
     background:none;
 
@@ -298,34 +366,56 @@ footer button{
 
     color:#fff;
 
-    font-size:15px;
+    display:flex;
+
+    flex-direction:column;
+
+    align-items:center;
+
+    gap:5px;
 
     cursor:pointer;
+
+    font-size:22px;
 
     transition:.2s;
 
 }
 
-footer button:active{
+nav button span{
 
-    transform:scale(.9);
+    font-size:12px;
+
+}
+
+nav button:active{
+
+    transform:scale(.92);
 
     color:#FFD700;
 
 }
+
+/* ================= Responsive ================= */
+
+@media(max-width:380px){
+
 #coin{
-    position:relative;
-    z-index:100;
-    pointer-events:auto;
-    touch-action:manipulation;
+
+width:240px;
+
 }
 
-.coin-wrapper{
-    position:relative;
-    z-index:100;
+.player-info h2{
+
+font-size:18px;
+
 }
 
-main{
-    position:relative;
-    z-index:100;
+#score{
+
+font-size:28px;
+
+}
+
 }
