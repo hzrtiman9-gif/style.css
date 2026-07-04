@@ -1,141 +1,99 @@
-// ===============================
-// CoinTC v1.0
-// ===============================
+// ==============================
+// CoinTC Mini App
+// app.js
+// ==============================
 
-const tg = window.Telegram.WebApp;
+// Telegram WebApp
+const tg = window.Telegram?.WebApp;
 
-tg.ready();
-tg.expand();
+if (tg) {
+    tg.ready();
+    tg.expand();
 
-// ---------- USER ----------
+    const user = tg.initDataUnsafe?.user;
 
-const user = tg.initDataUnsafe?.user;
-
-const username = document.getElementById("username");
-const scoreEl = document.getElementById("score");
-const energyEl = document.getElementById("energy");
-const energyFill = document.getElementById("energyFill");
-const coin = document.getElementById("coin");
-
-if (username) {
-    username.textContent =
-        user?.first_name ||
-        user?.username ||
-        "Player";
+    if (user) {
+        document.getElementById("username").innerHTML =
+            user.first_name + (user.last_name ? " " + user.last_name : "");
+    } else {
+        document.getElementById("username").innerHTML = "Guest";
+    }
 }
 
-// ---------- DATA ----------
+// ==============================
 
-const MAX_ENERGY = 1000;
+let balance = 0;
 
-let score = Number(localStorage.getItem("score")) || 0;
-let energy = Number(localStorage.getItem("energy")) || MAX_ENERGY;
+let energy = 100;
 
-// ---------- UI ----------
+const MAX_ENERGY = 100;
+
+const balanceText = document.getElementById("balance");
+
+const energyText = document.getElementById("energyValue");
+
+const energyBar = document.getElementById("energyBar");
+
+const coin = document.getElementById("coin");
+
+// ==============================
 
 function updateUI() {
 
-    scoreEl.textContent = score;
+    balanceText.innerHTML = balance.toLocaleString();
 
-    energyEl.textContent =
-        `${energy} / ${MAX_ENERGY}`;
+    energyText.innerHTML =
+        energy + " / " + MAX_ENERGY;
 
-    energyFill.style.width =
-        `${(energy / MAX_ENERGY) * 100}%`;
-
-    localStorage.setItem("score", score);
-    localStorage.setItem("energy", energy);
+    energyBar.style.width =
+        energy + "%";
 
 }
 
 updateUI();
 
-// ---------- FLOATING +1 ----------
+// ==============================
 
-function showPlusOne(x, y) {
+coin.onclick = () => {
 
-    const plus = document.createElement("div");
+    if (energy <= 0)
+        return;
 
-    plus.className = "plus-one";
-
-    plus.innerText = "+1";
-
-    plus.style.left = x + "px";
-    plus.style.top = y + "px";
-
-    document.body.appendChild(plus);
-
-    setTimeout(() => {
-
-        plus.remove();
-
-    }, 800);
-
-}
-
-// ---------- COIN ANIMATION ----------
-
-function pressCoin() {
-
-    coin.style.transform = `
-        perspective(900px)
-        rotateX(15deg)
-        rotateY(-15deg)
-        scale(.93)
-    `;
-
-}
-
-function releaseCoin() {
-
-    coin.style.transform = `
-        perspective(900px)
-        rotateX(0deg)
-        rotateY(0deg)
-        scale(1)
-    `;
-
-}
-
-coin.addEventListener("pointerdown", pressCoin);
-
-coin.addEventListener("pointerup", releaseCoin);
-
-coin.addEventListener("pointerleave", releaseCoin);
-
-// ---------- TAP ----------
-
-coin.addEventListener("click", (event) => {
-
-    if (energy <= 0) return;
-
-    score++;
+    balance++;
 
     energy--;
 
     updateUI();
 
-    showPlusOne(event.clientX, event.clientY);
+    // انیمیشن ضربه
 
-    if (navigator.vibrate) {
+    coin.style.transform =
+        "scale(.88) rotate(-8deg)";
 
-        navigator.vibrate(15);
+    setTimeout(() => {
 
-    }
+        coin.style.transform =
+            "scale(1)";
 
-    if (tg.HapticFeedback) {
+    },120);
+
+    // ویبره تلگرام
+
+    if (tg) {
 
         tg.HapticFeedback.impactOccurred("light");
 
     }
 
-});
+};
 
-// ---------- ENERGY ----------
+// ==============================
 
-setInterval(() => {
+// بازیابی انرژی
 
-    if (energy < MAX_ENERGY) {
+setInterval(()=>{
+
+    if(energy<MAX_ENERGY){
 
         energy++;
 
@@ -143,36 +101,92 @@ setInterval(() => {
 
     }
 
-}, 1000);
+},2000);
 
-// ---------- MENU ----------
+// ==============================
 
-document.getElementById("homeBtn").onclick = () => {
+// ذخیره محلی
 
-    tg.showAlert("🏠 Home");
+function saveGame(){
 
-};
+    localStorage.setItem("coin_balance",balance);
 
-document.getElementById("boostBtn").onclick = () => {
+    localStorage.setItem("coin_energy",energy);
 
-    tg.showAlert("🚀 Boost Coming Soon");
+}
 
-};
+// ==============================
 
-document.getElementById("earnBtn").onclick = () => {
+function loadGame(){
 
-    tg.showAlert("💰 Earn Coming Soon");
+    let b=localStorage.getItem("coin_balance");
 
-};
+    let e=localStorage.getItem("coin_energy");
 
-document.getElementById("friendsBtn").onclick = () => {
+    if(b){
 
-    tg.showAlert("👥 Friends Coming Soon");
+        balance=parseInt(b);
 
-};
+    }
 
-document.getElementById("taskBtn").onclick = () => {
+    if(e){
 
-    tg.showAlert("📋 Tasks Coming Soon");
+        energy=parseInt(e);
 
-};
+    }
+
+    updateUI();
+
+}
+
+loadGame();
+
+// ==============================
+
+setInterval(saveGame,1000);
+
+// ==============================
+
+// نمایش پیام خوش‌آمدگویی
+
+setTimeout(()=>{
+
+    console.log("Welcome to CoinTC");
+
+},500);
+
+// ==============================
+
+// صفحات منو (فعلاً نمونه)
+
+document.querySelectorAll(".card").forEach(card=>{
+
+    card.onclick=()=>{
+
+        alert(card.innerText);
+
+    }
+
+});
+
+// ==============================
+
+// ناوبری پایین
+
+document.querySelectorAll(".nav").forEach(btn=>{
+
+    btn.onclick=()=>{
+
+        document
+        .querySelectorAll(".nav")
+        .forEach(n=>n.classList.remove("active"));
+
+        btn.classList.add("active");
+
+    }
+
+});
+
+// ==============================
+
+console.log("CoinTC Loaded");
