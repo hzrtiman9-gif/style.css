@@ -1,150 +1,165 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fa" dir="rtl">
 
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CoinTC Mini App</title>
 
-<meta charset="UTF-8">
+    <link rel="stylesheet" href="style.css">
 
-<meta name="viewport"
-content="width=device-width,initial-scale=1.0,user-scalable=no">
+    <script src="https://telegram.org/js/telegram-web-app.js"></script>
 
-<title>CoinTC</title>
-
-<link rel="stylesheet" href="style.css">
-
-<script src="https://telegram.org/js/telegram-web-app.js"></script>
-
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;600;700&display=swap"
+        rel="stylesheet">
 </head>
 
 <body>
 
 <div class="background"></div>
 
-<header>
+<div class="app">
 
-<div class="player">
+    <header class="header">
 
-<div class="avatar">
+        <div class="profile">
 
-<img
-src="assets/avatar.png"
-alt="avatar">
+            <div class="avatar">
+                👤
+            </div>
+
+            <div>
+
+                <h3 id="username">
+                    Loading...
+                </h3>
+
+                <span>
+                    Level 1
+                </span>
+
+            </div>
+
+        </div>
+
+        <div class="balanceBox">
+
+            <span>Balance</span>
+
+            <h2 id="balance">
+                0
+            </h2>
+
+        </div>
+
+    </header>
+
+
+    <section class="coinSection">
+
+        <img
+            src="assets/logo.png"
+            id="coin"
+            class="coin"
+            alt="CoinTC">
+
+    </section>
+
+
+    <section class="energyBox">
+
+        <div class="energyText">
+
+            <span>
+                Energy
+            </span>
+
+            <span id="energyValue">
+                100 / 100
+            </span>
+
+        </div>
+
+        <div class="progress">
+
+            <div
+                class="progressBar"
+                id="energyBar">
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <section class="menuGrid">
+
+        <div class="card">
+            🎁
+            <span>Daily Reward</span>
+        </div>
+
+        <div class="card">
+            📋
+            <span>Tasks</span>
+        </div>
+
+        <div class="card">
+            👥
+            <span>Referral</span>
+        </div>
+
+        <div class="card">
+            🏆
+            <span>Leaderboard</span>
+        </div>
+
+        <div class="card">
+            💼
+            <span>Wallet</span>
+        </div>
+
+        <div class="card">
+            ⚙️
+            <span>Settings</span>
+        </div>
+
+    </section>
+
+
+    <footer class="bottomNav">
+
+        <button class="nav active">
+            🏠
+            <span>Home</span>
+        </button>
+
+        <button class="nav">
+            📋
+            <span>Tasks</span>
+        </button>
+
+        <button class="nav">
+            👥
+            <span>Friends</span>
+        </button>
+
+        <button class="nav">
+            🏆
+            <span>Rank</span>
+        </button>
+
+        <button class="nav">
+            💼
+            <span>Wallet</span>
+        </button>
+
+    </footer>
 
 </div>
-
-<div class="player-info">
-
-<h2 id="username">
-
-Loading...
-
-</h2>
-
-<p>CoinTC Miner</p>
-
-</div>
-
-</div>
-
-<div class="wallet">
-
-<div id="score">
-
-0
-
-</div>
-
-<span>Coins</span>
-
-</div>
-
-</header>
-
-<section class="energy">
-
-<div class="energy-top">
-
-<span>⚡ Energy</span>
-
-<span id="energy">
-
-1000 / 1000
-
-</span>
-
-</div>
-
-<div class="bar">
-
-<div id="energyFill"></div>
-
-</div>
-
-</section>
-
-<main>
-
-<div class="avatar">
-    <img src="coin.png" alt="avatar">
-</div>
-
-...
-
-<img
-id="coin"
-src="coin.png"
-alt="CoinTC"
-draggable="false">
-</div>
-
-</main>
-
-<nav>
-
-<button id="homeBtn">
-
-🏠
-
-<span>Home</span>
-
-</button>
-
-<button id="boostBtn">
-
-🚀
-
-<span>Boost</span>
-
-</button>
-
-<button id="earnBtn">
-
-💰
-
-<span>Earn</span>
-
-</button>
-
-<button id="friendsBtn">
-
-👥
-
-<span>Friends</span>
-
-</button>
-
-<button id="taskBtn">
-
-📋
-
-<span>Tasks</span>
-
-</button>
-
-</nav>
 
 <script src="app.js"></script>
 
 </body>
-
 </html>
