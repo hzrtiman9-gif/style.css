@@ -1,9 +1,13 @@
+// ===============================
+// CoinTC v1.0
+// ===============================
+
 const tg = window.Telegram.WebApp;
 
 tg.ready();
 tg.expand();
 
-// ---------------- USER ----------------
+// ---------- USER ----------
 
 const user = tg.initDataUnsafe?.user;
 
@@ -14,26 +18,30 @@ const energyFill = document.getElementById("energyFill");
 const coin = document.getElementById("coin");
 
 if (username) {
-    username.innerText =
+    username.textContent =
         user?.first_name ||
         user?.username ||
         "Player";
 }
 
-// ---------------- GAME ----------------
+// ---------- DATA ----------
 
 const MAX_ENERGY = 1000;
 
 let score = Number(localStorage.getItem("score")) || 0;
 let energy = Number(localStorage.getItem("energy")) || MAX_ENERGY;
 
+// ---------- UI ----------
+
 function updateUI() {
 
     scoreEl.textContent = score;
-    energyEl.textContent = energy;
+
+    energyEl.textContent =
+        `${energy} / ${MAX_ENERGY}`;
 
     energyFill.style.width =
-        (energy / MAX_ENERGY) * 100 + "%";
+        `${(energy / MAX_ENERGY) * 100}%`;
 
     localStorage.setItem("score", score);
     localStorage.setItem("energy", energy);
@@ -42,7 +50,7 @@ function updateUI() {
 
 updateUI();
 
-// ---------------- +1 ----------------
+// ---------- FLOATING +1 ----------
 
 function showPlusOne(x, y) {
 
@@ -50,7 +58,7 @@ function showPlusOne(x, y) {
 
     plus.className = "plus-one";
 
-    plus.innerHTML = "+1";
+    plus.innerText = "+1";
 
     plus.style.left = x + "px";
     plus.style.top = y + "px";
@@ -65,9 +73,9 @@ function showPlusOne(x, y) {
 
 }
 
-// ---------------- COIN ----------------
+// ---------- COIN ANIMATION ----------
 
-coin.addEventListener("pointerdown", () => {
+function pressCoin() {
 
     coin.style.transform = `
         perspective(900px)
@@ -76,20 +84,9 @@ coin.addEventListener("pointerdown", () => {
         scale(.93)
     `;
 
-});
+}
 
-coin.addEventListener("pointerup", () => {
-
-    coin.style.transform = `
-        perspective(900px)
-        rotateX(0deg)
-        rotateY(0deg)
-        scale(1)
-    `;
-
-});
-
-coin.addEventListener("pointerleave", () => {
+function releaseCoin() {
 
     coin.style.transform = `
         perspective(900px)
@@ -98,27 +95,31 @@ coin.addEventListener("pointerleave", () => {
         scale(1)
     `;
 
-});
+}
 
-// ---------------- CLICK ----------------
+coin.addEventListener("pointerdown", pressCoin);
 
-coin.addEventListener("pointerdown", (event) => {
+coin.addEventListener("pointerup", releaseCoin);
+
+coin.addEventListener("pointerleave", releaseCoin);
+
+// ---------- TAP ----------
+
+coin.addEventListener("click", (event) => {
 
     if (energy <= 0) return;
 
     score++;
+
     energy--;
 
     updateUI();
 
     showPlusOne(event.clientX, event.clientY);
 
-    if (navigator.vibrate) navigator.vibrate(15);
+    if (navigator.vibrate) {
 
-    if (tg.HapticFeedback)
-        tg.HapticFeedback.impactOccurred("light");
-
-});
+        navigator.vibrate(15);
 
     }
 
@@ -130,7 +131,7 @@ coin.addEventListener("pointerdown", (event) => {
 
 });
 
-// ---------------- ENERGY REGEN ----------------
+// ---------- ENERGY ----------
 
 setInterval(() => {
 
@@ -143,3 +144,35 @@ setInterval(() => {
     }
 
 }, 1000);
+
+// ---------- MENU ----------
+
+document.getElementById("homeBtn").onclick = () => {
+
+    tg.showAlert("🏠 Home");
+
+};
+
+document.getElementById("boostBtn").onclick = () => {
+
+    tg.showAlert("🚀 Boost Coming Soon");
+
+};
+
+document.getElementById("earnBtn").onclick = () => {
+
+    tg.showAlert("💰 Earn Coming Soon");
+
+};
+
+document.getElementById("friendsBtn").onclick = () => {
+
+    tg.showAlert("👥 Friends Coming Soon");
+
+};
+
+document.getElementById("taskBtn").onclick = () => {
+
+    tg.showAlert("📋 Tasks Coming Soon");
+
+};
