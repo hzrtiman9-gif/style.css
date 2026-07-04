@@ -1,15 +1,18 @@
-۹<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
+
 <head>
 
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+<meta name="viewport"
+content="width=device-width,initial-scale=1.0,user-scalable=no">
 
 <title>CoinTC</title>
 
-<script src="https://telegram.org/js/telegram-web-app.js"></script>
-
 <link rel="stylesheet" href="style.css">
+
+<script src="https://telegram.org/js/telegram-web-app.js"></script>
 
 </head>
 
@@ -19,88 +22,130 @@
 
 <header>
 
-<div class="profile">
+<div class="player">
 
 <div class="avatar">
-<img src="logo.jpg" width="56" height="56">
-</div>
 
-<div>
-
-<h2 id="username">Loading...</h2>
-
-<p>CoinTC Player</p>
+<img
+src="assets/avatar.png"
+alt="avatar">
 
 </div>
 
+<div class="player-info">
+
+<h2 id="username">
+
+Loading...
+
+</h2>
+
+<p>CoinTC Miner</p>
+
 </div>
 
-<div class="balance">
+</div>
 
-<span id="score">0</span>
+<div class="wallet">
 
-<p>Coins</p>
+<div id="score">
+
+0
+
+</div>
+
+<span>Coins</span>
 
 </div>
 
 </header>
 
+<section class="energy">
 
-<div class="energyBox">
+<div class="energy-top">
 
-<div class="energyText">
-
-⚡ Energy
+<span>⚡ Energy</span>
 
 <span id="energy">
 
-1000
+1000 / 1000
 
 </span>
 
-/1000
-
 </div>
 
-<div class="energyBar">
+<div class="bar">
 
 <div id="energyFill"></div>
 
 </div>
 
-</div>
-
+</section>
 
 <main>
 
-<div class="coin-wrapper">
+<div class="coin-area">
 
 <img
+
 id="coin"
-src="designarena_image_zijzizcb.jpg"
-draggable="false"
-alt="CoinTC Coin">
+
+src="assets/coin.png"
+
+alt="CoinTC"
+
+draggable="false">
 
 </div>
 
 </main>
 
+<nav>
 
-<footer>
+<button id="homeBtn">
 
-<button>🏠 Home</button>
+🏠
 
-<button>🚀 Boost</button>
+<span>Home</span>
 
-<button>💰 Earn</button>
+</button>
 
-<button>👥 Friends</button>
+<button id="boostBtn">
 
-<button>🏆 Rank</button>
+🚀
 
-</footer>
+<span>Boost</span>
+
+</button>
+
+<button id="earnBtn">
+
+💰
+
+<span>Earn</span>
+
+</button>
+
+<button id="friendsBtn">
+
+👥
+
+<span>Friends</span>
+
+</button>
+
+<button id="taskBtn">
+
+📋
+
+<span>Tasks</span>
+
+</button>
+
+</nav>
 
 <script src="app.js"></script>
 
 </body>
+
 </html>
